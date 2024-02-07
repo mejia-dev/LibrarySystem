@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model LibrarySystem.Models.Author
+
+
+<h2>@ViewBag.PageTitle</h2>
+<p>Are you sure you want to delete this?</p>
+
+@Html.DisplayNameFor(model => model.AuthorFirstName): @Html.DisplayFor(model => model.AuthorFirstName)
+@Html.DisplayNameFor(model => model.AuthorLastName): @Html.DisplayFor(model => model.AuthorLastName)
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}
+@Html.ActionLink("Back to List", "Index")
