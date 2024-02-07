@@ -19,10 +19,9 @@ else
 {
   <h4>Books by author:</h4>
   <ul>
-    @foreach (Author author in Model.Authors)
+    @foreach (Book book in Model.Books)
     {
-      <li>@Html.ActionLink($"{author.AuthorLastName}", "Details", "Authors", new { id = author.AuthorLastName})</li>
-      
+      <li>@Html.ActionLink($"{book.BookTitle}", "Details", "Books", new { id = book.BookTitle})</li>
     }
   </ul>
 }
