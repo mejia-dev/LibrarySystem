@@ -7,10 +7,18 @@
 @using System.Collections.Generic
 
 <h2>@ViewBag.PageTitle</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.AuthorFirstName): @Html.DisplayFor(model => model.AuthorFirstName)</h3>
-<h3>@Html.DisplayNameFor(model => model.AuthorLastName): @Html.DisplayFor(model => model.AuthorLastName)</h3>
 
+
+<p>
+<span><strong>Author First Name</strong>: @Html.DisplayFor(model => model.AuthorFirstName)</span><br />
+<span><strong>Author Last Name</strong>: @Html.DisplayFor(model => model.AuthorLastName)</span><br />
+</p>
+
+<p>@Html.ActionLink("Edit Author", "Edit", new { id = Model.AuthorId })</p>
+<p>@Html.ActionLink("Delete Author", "Delete", new { id = Model.AuthorId })</p>
+
+
+<hr />
 @if(@Model.Books.Count == 0)
 {
   <p>This Author does not contain any books</p>
@@ -21,11 +29,9 @@ else
   <ul>
     @foreach (Book book in Model.Books)
     {
-      <li>@Html.ActionLink($"{book.BookTitle}", "Details", "Books", new { id = book.BookTitle})</li>
+      <li>@Html.ActionLink($"{book.BookTitle}", "Details", "Books", new { id = book.BookId})</li>
     }
   </ul>
 }
-
+<hr />
 <p>@Html.ActionLink("Back to Authors", "Index")</p>
-<p>@Html.ActionLink("Edit Author", "Edit", new { id = Model.AuthorId })</p>
-<p>@Html.ActionLink("Delete Author", "Delete", new { id = Model.AuthorId })</p>

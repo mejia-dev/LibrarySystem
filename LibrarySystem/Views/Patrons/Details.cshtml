@@ -24,7 +24,11 @@ else
     @foreach(BookPatron join in Model.JoinEntities)
     {
       <li>@Html.ActionLink($"{join.Book.BookTitle}", "Details", "Books", new {id = join.Book.BookId})</li>
-      <p>@Html.join.Book.BookId</p>
+      <p>Copy: @join.Book.BookId</p>
+      <p>Check Out: @join.BookPatron.LoanDate</p>
+      <p>Due: @join.BookPatron.DueDate</p>
+
+
       
       @using (Html.BeginForm("DeleteJoin", "Books"))
       {

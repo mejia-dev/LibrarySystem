@@ -8,9 +8,15 @@
 
 <h2>@ViewBag.PageTitle</h2>
 
-<span>@Html.DisplayNameFor(model => model.BookTitle): @Html.DisplayFor(model => model.BookTitle)</span><br />
-<span>@Html.DisplayNameFor(model => model.BookPublisher): @Html.DisplayFor(model => model.BookPublisher)</span><br />
-<span>@Html.DisplayNameFor(model => model.Author): @Html.DisplayFor(model => model.Author.AuthorFullName)</span>
+<p>
+<span><strong>Title</strong>: @Html.DisplayFor(model => model.BookTitle)</span><br />
+<span><strong>Publisher</strong>: @Html.DisplayFor(model => model.BookPublisher)</span><br />
+<span><strong>@Html.DisplayNameFor(model => model.Author)</strong>: @Html.ActionLink($"{Model.Author.AuthorFullName}", "Details", "Authors", new {id = Model.Author.AuthorId})</span><br />
+<span><strong>Book Inventory Number (ID)</strong>: @Html.DisplayFor(model => model.BookId)</span>
+</p>
+
+<p>@Html.ActionLink("Edit This Book", "Edit", new { id = Model.BookId })</p>
+<p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
 
 <hr />
 @if(@Model.JoinEntities.Count == 0)
@@ -23,7 +29,7 @@ else
   <ul>
     @foreach(BookPatron join in Model.JoinEntities)
     {
-      <li>Patron: @join.Patron.PatronName</li>
+      <li>Patron: @Html.ActionLink($"{join.Patron.PatronName}", "Details", "Patrons", new {id = join.Patron.PatronId})</li>
       @using (Html.BeginForm("DeleteJoin", "Patrons"))
       {
         @Html.Hidden("joinId", @join.BookPatronId)
@@ -32,7 +38,5 @@ else
     }
   </ul>
 }
-<p>@Html.ActionLink("Edit This Book", "Edit", new { id = Model.BookId })</p>
-<p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
-<br />
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<hr />
+<p>@Html.ActionLink("Back to All Books", "Index")</p>
