@@ -8,5 +8,13 @@ namespace LibrarySystem.Models
     public string AuthorFirstName { get; set; }
     public string AuthorLastName { get; set; }
     public List<Book> Books { get; set; }
+
+    public string AuthorFullName
+    {
+      get
+      {
+        return AuthorFirstName + " " + AuthorLastName;
+      }
+    }
   }
 }

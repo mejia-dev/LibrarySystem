@@ -13,9 +13,9 @@
 
 @foreach (Author author in Model)
 {
-  <li>@Html.ActionLink($"{author.AuthorFirstName} {author.AuthorLastName}", "Details", new { id = author.AuthorId })</li>
+  <li>@Html.ActionLink($"{author.AuthorFullName}", "Details", new { id = author.AuthorId })</li>
 }
 
-<p>@Html.ActionLink("Add new course", "Create")</p>
+<p>@Html.ActionLink("Add new author", "Create")</p>
 
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

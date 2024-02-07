@@ -3,8 +3,10 @@
 }
 
 @model LibrarySystem.Models.Book
+@using LibrarySystem.Models;
 
-<h4>Add a new book</h4>
+<h2>@ViewBag.PageTitle</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -12,10 +14,10 @@
   @Html.TextBoxFor(model => model.BookTitle)
   @Html.LabelFor(model => model.BookPublisher)
   @Html.TextBoxFor(model => model.BookPublisher)
-
+@* 
   @Html.LabelFor(model => model.Author)
-  @Html.DropDownList("AuthorId")
+  @Html.DropDownList("AuthorId") *@
   
   <input type="submit" value="Add new book" class="btn btn-outline-success" />
 }
-<p>@Html.ActionLink("Show all book", "Index")</p>
+<p>@Html.ActionLink("Show all books", "Index")</p>

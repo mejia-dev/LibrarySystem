@@ -21,12 +21,17 @@ namespace LibrarySystem.Controllers
     public ActionResult Index()
     {
       ViewBag.PageTitle = "View All Books";
-      return View(_db.Books.ToList());
+                          List<Book> model = _db.Books
+                          .Include(book => book.Author)
+                          .ToList();
+      return View(model);
+
     }
 
     public ActionResult Create()
     {
       ViewBag.PageTitle = "Add a Book";
+      ViewBag.AuthorsList = new SelectList(_db.Authors, "AuthorId", "AuthorFullName");
       return View();
     }
 
@@ -38,14 +43,14 @@ namespace LibrarySystem.Controllers
       return RedirectToAction("Index");
     }
 
-    // public ActionResult Details(int id)
-    // {
-    //   Author thisAuthor = _db.Authors
-    //       .Include(author => author.Books)
-    //       .FirstOrDefault(author => author.AuthorId == id);
-    //   ViewBag.PageTitle = $"Author Details - {thisAuthor.AuthorFirstName} {thisAuthor.AuthorLastName}";
-    //   return View(thisAuthor);
-    // }
+    public ActionResult Details(int id)
+    {
+      Book thisBook = _db.Books
+          .Include(book => book.Author)
+          .FirstOrDefault(book => book.BookId == id);
+      ViewBag.PageTitle = $"Book Details - {thisBook.BookTitle} ";
+      return View(thisBook);
+    }
 
     public ActionResult Edit(int id)
     {
