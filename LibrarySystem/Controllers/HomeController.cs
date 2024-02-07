@@ -8,7 +8,7 @@ namespace LibrarySystem.Controllers
       [HttpGet("/")]
       public ActionResult Index()
       {
-        ViewBag.PageTitle = "Home - Library System";
+        ViewBag.PageTitle = "Home";
         return View();
       }
 
