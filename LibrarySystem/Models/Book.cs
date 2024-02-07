@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace LibrarySystem.Models
 {
   public class Book
@@ -7,5 +9,6 @@ namespace LibrarySystem.Models
     public string BookPublisher { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; }
+    public List<BookPatron> JoinEntites { get; set; }
   }
 }
