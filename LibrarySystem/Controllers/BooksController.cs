@@ -31,7 +31,7 @@ namespace LibrarySystem.Controllers
     public ActionResult Create()
     {
       ViewBag.PageTitle = "Add a Book";
-      ViewBag.AuthorsList = new SelectList(_db.Authors, "AuthorId", "AuthorFullName");
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorFullName");
       return View();
     }
 
