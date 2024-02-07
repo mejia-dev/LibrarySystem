@@ -1,5 +1,10 @@
 @import url('https://fonts.cdnfonts.com/css/oregon-ldo');
+@import url('https://fonts.cdnfonts.com/css/grota-sans-alt');
 
-h1 {
+h1, h2, h3 {
   font-family: 'Oregon LDO', sans-serif;
+}
+
+p, button, ul {
+  font-family: 'Grota Sans Alt', sans-serif;
 }

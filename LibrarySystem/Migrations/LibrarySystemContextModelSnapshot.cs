@@ -34,6 +34,47 @@ namespace LibrarySystem.Migrations
 
                     b.ToTable("Authors");
                 });
+
+            modelBuilder.Entity("LibrarySystem.Models.Book", b =>
+                {
+                    b.Property<int>("BookId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookCopyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BookPublisher")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BookTitle")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("BookId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("LibrarySystem.Models.Book", b =>
+                {
+                    b.HasOne("LibrarySystem.Models.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("LibrarySystem.Models.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
 #pragma warning restore 612, 618
         }
     }
