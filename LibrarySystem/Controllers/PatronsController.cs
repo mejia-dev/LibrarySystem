@@ -68,8 +68,11 @@ namespace LibrarySystem.Controllers
 
     public ActionResult AddBook(int id)
     {
-      Patron thisPatron = _db.Patrons.FirstOrDefault(patrons => patrons.PatronId == id);
-      ViewBag.BookId = new SelectList(_db.Books, "BookId", "BookTitle");
+      Patron thisPatron = _db.Patrons
+          .Include(patron => patron.JoinEntities)
+          .ThenInclude(join => join.Book)
+          .FirstOrDefault(patrons => patrons.PatronId == id);
+          ViewBag.BookId = new SelectList(_db.Books, "BookId", "BookTitle");
       return View(thisPatron);
     }
 
@@ -81,7 +84,10 @@ namespace LibrarySystem.Controllers
       #nullable disable
       if (bookId != 0 && joinEntity == null)
       {
-        _db.BookPatrons.Add(new BookPatron() { BookId = bookId, PatronId = patron.PatronId });
+        BookPatron bookLoan = new BookPatron() { BookId = bookId, PatronId = patron.PatronId, Checkout = DateTime.Now };
+        bookLoan.GetReturnDate();
+        _db.BookPatrons.Add(bookLoan);
+
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = patron.PatronId });

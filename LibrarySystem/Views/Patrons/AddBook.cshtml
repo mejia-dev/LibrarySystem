@@ -3,6 +3,7 @@
 }
 
 @model LibrarySystem.Models.Patron
+@using LibrarySystem.Models;
 
 
 @using (Html.BeginForm())
@@ -10,12 +11,6 @@
   @Html.HiddenFor(model => model.PatronId)
   @Html.Label("Check out a book")
   @Html.DropDownList("BookId")
-
-  @Html.LabelFor(model => model.PatronName)
-  @Html.TextBoxFor(model => model.PatronName)
-
-  @Html.LabelFor(model => model.LibraryCard)
-  @Html.TextBoxFor(model => model.LibraryCard)
 
   <input type="submit" value="Place hold" />
 }
