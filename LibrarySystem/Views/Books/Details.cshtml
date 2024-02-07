@@ -6,13 +6,32 @@
 @model LibrarySystem.Models.Book
 @using System.Collections.Generic
 
-<h2>Book Details</h2>
+<h2>@ViewBag.PageTitle</h2>
+
+<span>@Html.DisplayNameFor(model => model.BookTitle): @Html.DisplayFor(model => model.BookTitle)</span><br />
+<span>@Html.DisplayNameFor(model => model.BookPublisher): @Html.DisplayFor(model => model.BookPublisher)</span><br />
+<span>@Html.DisplayNameFor(model => model.Author): @Html.DisplayFor(model => model.Author.AuthorFullName)</span>
+
 <hr />
-<h3>@Html.DisplayNameFor(model => model.BookTitle): @Html.DisplayFor(model => model.BookTitle)</h3>
-<h3>@Html.DisplayNameFor(model => model.BookPublisher): @Html.DisplayFor(model => model.BookPublisher)</h3>
-<h3>@Html.DisplayNameFor(model => model.Author): @Html.DisplayFor(model => model.Author.AuthorLastName)</h3>
-
-
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This book has not been assigned to a patron!</p>
+}
+else
+{
+  <h4>This book has been checked out to:</h4>
+  <ul>
+    @foreach(BookPatron join in Model.JoinEntities)
+    {
+      <li>Patron: @join.Patron.PatronName</li>
+      @using (Html.BeginForm("DeleteJoin", "Patrons"))
+      {
+        @Html.Hidden("joinId", @join.BookPatronId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
 <p>@Html.ActionLink("Edit This Book", "Edit", new { id = Model.BookId })</p>
 <p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
 <br />

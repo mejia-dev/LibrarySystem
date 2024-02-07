@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model LibrarySystem.Models.Patron
+
+<h4>Add a new patron</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.PatronName)
+    @Html.TextBoxFor(model => model.PatronName)
+
+    @Html.LabelFor(model => model.LibraryCard)
+    @Html.TextBoxFor(model => model.LibraryCard)
+
+    <input type="submit" value="Add new patron" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all patrons", "Index")</p>

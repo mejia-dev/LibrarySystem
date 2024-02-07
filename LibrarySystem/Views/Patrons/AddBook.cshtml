@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model LibrarySystem.Models.Patron
+
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.PatronId)
+  @Html.Label("Check out a book")
+  @Html.DropDownList("BookId")
+
+  <input type="submit" value="Place hold" />
+}
+
+<p>@Html.ActionLink("Go back", "Details", new {id = Model.PatronId})</p>

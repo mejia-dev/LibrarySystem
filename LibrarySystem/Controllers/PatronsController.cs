@@ -43,8 +43,8 @@ namespace LibrarySystem.Controllers
     public ActionResult Details(int id)
     {
       Patron thisPatron = _db.Patrons
-          .Include(patron => patron.JoinEntites)
-          .ThenInclude(patron => patron.Book)
+          .Include(patron => patron.JoinEntities)
+          .ThenInclude(join => join.Book)
           .FirstOrDefault(patron => patron.PatronId == id);
       ViewBag.PageTitle = $"Patron Details - {thisPatron.PatronName} ";
       return View(thisPatron);
@@ -54,6 +54,7 @@ namespace LibrarySystem.Controllers
     {
       Patron thisPatron = _db.Patrons.FirstOrDefault(patrons => patrons.PatronId == id);
       ViewBag.PageTitle = $"Edit Patron - {thisPatron.PatronName}";
+      ViewBag.BookId = new SelectList(_db.Books, "BookId", "BookTitle");  
       return View(thisPatron);
     }
 
@@ -63,6 +64,27 @@ namespace LibrarySystem.Controllers
       _db.Patrons.Update(patron);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult AddBook(int id)
+    {
+      Patron thisPatron = _db.Patrons.FirstOrDefault(patrons => patrons.PatronId == id);
+      ViewBag.BookId = new SelectList(_db.Books, "BookId", "BookTitle");
+      return View(thisPatron);
+    }
+
+    [HttpPost]
+    public ActionResult AddBook(Patron patron, int bookId)
+    {
+      #nullable enable
+      BookPatron? joinEntity = _db.BookPatrons.FirstOrDefault(join => (join.BookId == bookId && join.PatronId == patron.PatronId));
+      #nullable disable
+      if (bookId != 0 && joinEntity == null)
+      {
+        _db.BookPatrons.Add(new BookPatron() { BookId = bookId, PatronId = patron.PatronId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = patron.PatronId });
     }
 
     public ActionResult Delete(int id)
@@ -81,5 +103,25 @@ namespace LibrarySystem.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult DeleteJoin(int joinId)
+    {
+      BookPatron joinEntry = _db.BookPatrons.FirstOrDefault(entry => entry.BookPatronId == joinId);
+      _db.BookPatrons.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Search()
+    {
+      ViewBag.PageTitle = "Search Patrons";
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Search(string searchName)
+    {
+      List<Patron> model = _db.Patrons.Where(patrons => patrons.PatronName.Contains(searchName)).ToList();
+      return View("Index", model);
+}
   }
 }
