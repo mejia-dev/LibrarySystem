@@ -4,23 +4,18 @@
 
 @model LibrarySystem.Models.Book
 
-<h2>@ViewBag.PageTitle</h2>
-
+<h4>Add a new book</h4>
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.BookId)
-
   @Html.LabelFor(model => model.BookTitle)
   @Html.TextBoxFor(model => model.BookTitle)
-
   @Html.LabelFor(model => model.BookPublisher)
   @Html.TextBoxFor(model => model.BookPublisher)
 
   @Html.LabelFor(model => model.Author)
   @Html.DropDownList("AuthorId")
-
-  <input type="submit" value="Save" />
-  @Html.ActionLink("Discard changes", "Details", new {id = Model.BookId})
+  
+  <input type="submit" value="Add new book" class="btn btn-outline-success" />
 }
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Show all book", "Index")</p>

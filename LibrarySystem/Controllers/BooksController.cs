@@ -38,5 +38,45 @@ namespace LibrarySystem.Controllers
       return RedirectToAction("Index");
     }
 
+    // public ActionResult Details(int id)
+    // {
+    //   Author thisAuthor = _db.Authors
+    //       .Include(author => author.Books)
+    //       .FirstOrDefault(author => author.AuthorId == id);
+    //   ViewBag.PageTitle = $"Author Details - {thisAuthor.AuthorFirstName} {thisAuthor.AuthorLastName}";
+    //   return View(thisAuthor);
+    // }
+
+    public ActionResult Edit(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      ViewBag.PageTitle = $"Edit Author - {thisBook.BookTitle}";
+      return View(thisBook);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Book book)
+    {
+      _db.Books.Update(book);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      ViewBag.PageTitle = $"Delete Book - {thisBook.BookTitle}";
+      return View(thisBook);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      _db.Books.Remove(thisBook);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
   }
 }

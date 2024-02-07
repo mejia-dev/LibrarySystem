@@ -9,13 +9,11 @@
 <h2>Book Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.BookTitle): @Html.DisplayFor(model => model.BookTitle)</h3>
-<h3>@Html.DisplayNameFor(model => model.BookCopyId): @Html.DisplayFor(model => model.BookCopyId)</h3>   
 <h3>@Html.DisplayNameFor(model => model.BookPublisher): @Html.DisplayFor(model => model.BookPublisher)</h3>
 <h3>@Html.DisplayNameFor(model => model.Author): @Html.DisplayFor(model => model.Author.AuthorLastName)</h3>
 
 
 <p>@Html.ActionLink("Edit This Book", "Edit", new { id = Model.BookId })</p>
-<p>@Html.ActionLink("Add a Book", "AddBook")</p>
 <p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
 <br />
 <p>@Html.ActionLink("Back to list", "Index")</p>
