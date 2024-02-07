@@ -41,7 +41,6 @@ namespace LibrarySystem.Controllers
     {
       Author thisAuthor = _db.Authors
           .Include(author => author.Books)
-          .ThenInclude(join => join.Book)
           .FirstOrDefault(author => author.AuthorId == id);
       ViewBag.PageTitle = $"Author Details - {thisAuthor.AuthorFirstName} {thisAuthor.AuthorLastName}";
       return View(thisAuthor);
