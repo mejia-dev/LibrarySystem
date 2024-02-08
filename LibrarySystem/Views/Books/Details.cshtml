@@ -13,7 +13,7 @@
 <span><strong>Publisher</strong>: @Html.DisplayFor(model => model.BookPublisher)</span><br />
 <span><strong>@Html.DisplayNameFor(model => model.Author)</strong>: @Html.ActionLink($"{Model.Author.AuthorFullName}", "Details", "Authors", new {id = Model.Author.AuthorId})</span><br />
 <span><strong>Book Inventory Number (ID)</strong>: @Html.DisplayFor(model => model.BookId)</span>
-</p>
+<span><strong>CheckedOut</strong>: @Html.DisplayFor(model => model.CheckedOut)</span>
 
 <p>@Html.ActionLink("Edit This Book", "Edit", new { id = Model.BookId })</p>
 <p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>

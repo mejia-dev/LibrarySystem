@@ -126,3 +126,9 @@ namespace LibrarySystem.Controllers
 
   }
 }
+
+//trying to set up checkout bool 
+// if(thisBook.JoinEntities != null)
+//           {
+//             book => book.CheckOut == true;
+//           }
