@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibrarySystem.Migrations
 {
     [DbContext(typeof(LibrarySystemContext))]
-    [Migration("20240207195837_AddPatronAndBookPatronJoinTableEntities")]
-    partial class AddPatronAndBookPatronJoinTableEntities
+    [Migration("20240208001842_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace LibrarySystem.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("LoanDate")
+                    b.Property<DateTime>("Checkout")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("PatronId")
@@ -118,13 +118,13 @@ namespace LibrarySystem.Migrations
             modelBuilder.Entity("LibrarySystem.Models.BookPatron", b =>
                 {
                     b.HasOne("LibrarySystem.Models.Book", "Book")
-                        .WithMany("JoinEntites")
+                        .WithMany("JoinEntities")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LibrarySystem.Models.Patron", "Patron")
-                        .WithMany("JoinEntites")
+                        .WithMany("JoinEntities")
                         .HasForeignKey("PatronId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -141,12 +141,12 @@ namespace LibrarySystem.Migrations
 
             modelBuilder.Entity("LibrarySystem.Models.Book", b =>
                 {
-                    b.Navigation("JoinEntites");
+                    b.Navigation("JoinEntities");
                 });
 
             modelBuilder.Entity("LibrarySystem.Models.Patron", b =>
                 {
-                    b.Navigation("JoinEntites");
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }
