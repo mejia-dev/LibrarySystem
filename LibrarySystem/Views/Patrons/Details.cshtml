@@ -25,8 +25,8 @@ else
     {
       <li>@Html.ActionLink($"{join.Book.BookTitle}", "Details", "Books", new {id = join.Book.BookId})</li>
       <p>Copy: @join.Book.BookId</p>
-      <p>Check Out:</p>
-      <p>Due:</p>
+      <p>Check Out: @join.Checkout</p>
+      <p>Due: @join.ReturnDate</p>
 
 
       
